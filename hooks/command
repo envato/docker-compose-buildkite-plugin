@@ -8,6 +8,8 @@ DIR="$(cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd)"
 
 commands=()
 
+env | grep BUILDKITE_PLUGIN_DOCKER_COMPOSE
+
 [[ -n "$(plugin_read_list BUILD)" ]] && commands+=("BUILD")
 [[ -n "$(plugin_read_list RUN)" ]] && commands+=("RUN")
 [[ -n "$(plugin_read_list PUSH)" ]] && commands+=("PUSH")
