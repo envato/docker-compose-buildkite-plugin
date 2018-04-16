@@ -10,6 +10,11 @@ override_file="docker-compose.buildkite-${BUILDKITE_BUILD_NUMBER}-override.yml"
 pull_retries="$(plugin_read_config PULL_RETRIES "0")"
 shell="$(plugin_read_config SHELL "/bin/sh -e -c")"
 
+# false means no, shell will invoke directly
+if [[ "$shell" == "false" ]] ; then
+  shell=""
+fi
+
 cleanup() {
   echo "~~~ :docker: Cleaning up after docker-compose" >&2
   compose_cleanup

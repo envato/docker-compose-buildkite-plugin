@@ -27,6 +27,8 @@ properties:
     type: integer
   push-retries:
     type: integer
+  shell:
+    type: string
   cache-from:
     type: [ string, array ]
     minimum: 1
