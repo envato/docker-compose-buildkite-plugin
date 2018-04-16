@@ -8,7 +8,7 @@ run_service="$(plugin_read_config RUN)"
 container_name="$(docker_compose_project_name)_${run_service}_build_${BUILDKITE_BUILD_NUMBER}"
 override_file="docker-compose.buildkite-${BUILDKITE_BUILD_NUMBER}-override.yml"
 pull_retries="$(plugin_read_config PULL_RETRIES "0")"
-shell="$(plugin_read_config SHELL "/bin/bash -c")"
+shell="$(plugin_read_config SHELL "/bin/sh -e -c")"
 
 cleanup() {
   echo "~~~ :docker: Cleaning up after docker-compose" >&2

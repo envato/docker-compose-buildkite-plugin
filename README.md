@@ -293,9 +293,9 @@ The default is `false`.
 
 ### `shell` (optional, run only)
 
-The shell that is used to invoke commands. This is so that multiple commands can be interpretted. If your container doesn't have bash installed, `/bin/sh -c` should work.
+The shell that is used to invoke commands. This is so that multiple commands can be interpretted.
 
-The default is `/bin/bash -c`.
+The default is `/bin/sh -e -c`.
 
 ## Developing
 
