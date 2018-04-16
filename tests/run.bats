@@ -19,7 +19,7 @@ load '../lib/run'
 
   stub docker-compose \
     "-f docker-compose.yml -p buildkite1111 build --pull myservice : echo built myservice" \
-    "-f docker-compose.yml -p buildkite1111 run --name buildkite1111_myservice_build_1 myservice echo hello world : echo ran myservice"
+    "-f docker-compose.yml -p buildkite1111 run --name buildkite1111_myservice_build_1 myservice /bin/bash -c 'echo hello world' : echo ran myservice"
 
   stub buildkite-agent \
     "meta-data get docker-compose-plugin-built-image-tag-myservice : exit 1"
@@ -44,7 +44,7 @@ load '../lib/run'
 
   stub docker-compose \
     "-f docker-compose.yml -p buildkite1111 build --pull myservice : echo built myservice" \
-    "-f docker-compose.yml -p buildkite1111 run --name buildkite1111_myservice_build_1 myservice $BUILDKITE_COMMAND : echo ran myservice"
+    "-f docker-compose.yml -p buildkite1111 run --name buildkite1111_myservice_build_1 myservice /bin/bash -c '$BUILDKITE_COMMAND' : echo ran myservice"
 
   stub buildkite-agent \
     "meta-data get docker-compose-plugin-built-image-tag-myservice : exit 1"
@@ -73,7 +73,7 @@ load '../lib/run'
 
   stub docker-compose \
     "-f docker-compose.yml -p buildkite1111 build --pull myservice : echo built myservice" \
-    "-f docker-compose.yml -p buildkite1111 run --name buildkite1111_myservice_build_1 -e MYENV=0 -e MYENV -e MYENV=2 -e MYENV myservice pwd : echo ran myservice"
+    "-f docker-compose.yml -p buildkite1111 run --name buildkite1111_myservice_build_1 -e MYENV=0 -e MYENV -e MYENV=2 -e MYENV myservice /bin/bash -c 'pwd' : echo ran myservice"
 
   stub buildkite-agent \
     "meta-data get docker-compose-plugin-built-image-tag-myservice : exit 1"
@@ -97,7 +97,7 @@ load '../lib/run'
 
   stub docker-compose \
     "-f docker-compose.yml -p buildkite1111 -f docker-compose.buildkite-1-override.yml pull myservice : echo pulled myservice" \
-    "-f docker-compose.yml -p buildkite1111 -f docker-compose.buildkite-1-override.yml run --name buildkite1111_myservice_build_1 myservice pwd : echo ran myservice"
+    "-f docker-compose.yml -p buildkite1111 -f docker-compose.buildkite-1-override.yml run --name buildkite1111_myservice_build_1 myservice /bin/bash -c pwd : echo ran myservice"
 
   stub buildkite-agent \
     "meta-data get docker-compose-plugin-built-image-tag-myservice : echo myimage"
@@ -122,7 +122,7 @@ load '../lib/run'
 
   stub docker-compose \
     "-f tests/composefiles/docker-compose.v2.0.yml -p buildkite1111 -f docker-compose.buildkite-1-override.yml pull myservice : echo pulled myservice" \
-    "-f tests/composefiles/docker-compose.v2.0.yml -p buildkite1111 -f docker-compose.buildkite-1-override.yml run --name buildkite1111_myservice_build_1 myservice pwd : echo ran myservice"
+    "-f tests/composefiles/docker-compose.v2.0.yml -p buildkite1111 -f docker-compose.buildkite-1-override.yml run --name buildkite1111_myservice_build_1 myservice /bin/bash -c pwd : echo ran myservice"
 
   stub buildkite-agent \
     "meta-data get docker-compose-plugin-built-image-tag-myservice-tests/composefiles/docker-compose.v2.0.yml : echo myimage"
@@ -148,7 +148,7 @@ export BUILDKITE_JOB_ID=1111
 
   stub docker-compose \
     "-f tests/composefiles/docker-compose.v2.0.yml -f tests/composefiles/docker-compose.v2.1.yml -p buildkite1111 -f docker-compose.buildkite-1-override.yml pull myservice : echo pulled myservice" \
-    "-f tests/composefiles/docker-compose.v2.0.yml -f tests/composefiles/docker-compose.v2.1.yml -p buildkite1111 -f docker-compose.buildkite-1-override.yml run --name buildkite1111_myservice_build_1 myservice pwd : echo ran myservice"
+    "-f tests/composefiles/docker-compose.v2.0.yml -f tests/composefiles/docker-compose.v2.1.yml -p buildkite1111 -f docker-compose.buildkite-1-override.yml run --name buildkite1111_myservice_build_1 myservice /bin/bash -c pwd : echo ran myservice"
 
   stub buildkite-agent \
     "meta-data get docker-compose-plugin-built-image-tag-myservice-tests/composefiles/docker-compose.v2.0.yml-tests/composefiles/docker-compose.v2.1.yml : echo myimage"
@@ -197,7 +197,7 @@ export BUILDKITE_JOB_ID=1111
   stub docker-compose \
     "-f docker-compose.yml -p buildkite1111 -f docker-compose.buildkite-1-override.yml pull myservice : exit 2" \
     "-f docker-compose.yml -p buildkite1111 -f docker-compose.buildkite-1-override.yml pull myservice : echo pulled myservice" \
-    "-f docker-compose.yml -p buildkite1111 -f docker-compose.buildkite-1-override.yml run --name buildkite1111_myservice_build_1 myservice pwd : echo ran myservice"
+    "-f docker-compose.yml -p buildkite1111 -f docker-compose.buildkite-1-override.yml run --name buildkite1111_myservice_build_1 myservice /bin/bash -c pwd : echo ran myservice"
 
   stub buildkite-agent \
     "meta-data get docker-compose-plugin-built-image-tag-myservice : echo myimage"
@@ -223,7 +223,7 @@ export BUILDKITE_JOB_ID=1111
 
   stub docker-compose \
     "-f docker-compose.yml -p buildkite1111 -f docker-compose.buildkite-1-override.yml pull myservice : echo pulled myservice" \
-    "-f docker-compose.yml -p buildkite1111 -f docker-compose.buildkite-1-override.yml run --name buildkite1111_myservice_build_1 -T myservice pwd : echo ran myservice without tty"
+    "-f docker-compose.yml -p buildkite1111 -f docker-compose.buildkite-1-override.yml run --name buildkite1111_myservice_build_1 -T myservice /bin/bash -c pwd : echo ran myservice without tty"
 
   stub buildkite-agent \
     "meta-data get docker-compose-plugin-built-image-tag-myservice : echo myimage"
@@ -248,7 +248,7 @@ export BUILDKITE_JOB_ID=1111
 
   stub docker-compose \
     "-f docker-compose.yml -p buildkite1111 -f docker-compose.buildkite-1-override.yml pull myservice : echo pulled myservice" \
-    "-f docker-compose.yml -p buildkite1111 -f docker-compose.buildkite-1-override.yml run --name buildkite1111_myservice_build_1 --no-deps myservice pwd : echo ran myservice without dependencies"
+    "-f docker-compose.yml -p buildkite1111 -f docker-compose.buildkite-1-override.yml run --name buildkite1111_myservice_build_1 --no-deps myservice /bin/bash -c pwd : echo ran myservice without dependencies"
 
   stub buildkite-agent \
     "meta-data get docker-compose-plugin-built-image-tag-myservice : echo myimage"
@@ -275,7 +275,7 @@ export BUILDKITE_JOB_ID=1111
 
   stub docker-compose \
     "-f llamas1.yml -f llamas2.yml -f llamas3.yml -p buildkite1111 build --pull myservice : echo built myservice" \
-    "-f llamas1.yml -f llamas2.yml -f llamas3.yml -p buildkite1111 run --name buildkite1111_myservice_build_1 myservice echo hello world : echo ran myservice"
+    "-f llamas1.yml -f llamas2.yml -f llamas3.yml -p buildkite1111 run --name buildkite1111_myservice_build_1 myservice /bin/bash -c 'echo hello world' : echo ran myservice"
 
   stub buildkite-agent \
     "meta-data get docker-compose-plugin-built-image-tag-myservice-llamas1.yml-llamas2.yml-llamas3.yml : exit 1"
@@ -300,7 +300,7 @@ export BUILDKITE_JOB_ID=1111
 
   stub docker-compose \
     "-f docker-compose.yml -p buildkite1111 build --pull myservice : echo built myservice" \
-    "-f docker-compose.yml -p buildkite1111 run --name buildkite1111_myservice_build_1 myservice pwd : exit 1" \
+    "-f docker-compose.yml -p buildkite1111 run --name buildkite1111_myservice_build_1 myservice /bin/bash -c pwd : exit 1" \
     "-f docker-compose.yml -p buildkite1111 kill : echo killing containers" \
     "-f docker-compose.yml -p buildkite1111 rm --force -v : echo removing stopped containers" \
     "-f docker-compose.yml -p buildkite1111 down --volumes : echo removing everything"
@@ -327,7 +327,7 @@ export BUILDKITE_JOB_ID=1111
 
   stub docker-compose \
     "-f docker-compose.yml -p buildkite1111 build --pull myservice : echo built myservice" \
-    "-f docker-compose.yml -p buildkite1111 run --name buildkite1111_myservice_build_1 myservice pwd : exit 2"
+    "-f docker-compose.yml -p buildkite1111 run --name buildkite1111_myservice_build_1 myservice /bin/bash -c pwd : exit 2"
 
   stub buildkite-agent \
     "meta-data get docker-compose-plugin-built-image-tag-myservice : exit 1"
@@ -354,7 +354,7 @@ export BUILDKITE_JOB_ID=1111
 
   stub docker-compose \
     "-f docker-compose.yml -p buildkite1111 -f docker-compose.buildkite-1-override.yml pull --parallel myservice1 myservice2 : echo pulled myservice1 and myservice2" \
-    "-f docker-compose.yml -p buildkite1111 -f docker-compose.buildkite-1-override.yml run --name buildkite1111_myservice1_build_1 myservice1 pwd : echo ran myservice1"
+    "-f docker-compose.yml -p buildkite1111 -f docker-compose.buildkite-1-override.yml run --name buildkite1111_myservice1_build_1 myservice1 /bin/bash -c pwd : echo ran myservice1"
 
   stub buildkite-agent \
     "meta-data get docker-compose-plugin-built-image-tag-myservice1 : echo myimage1" \

@@ -45,6 +45,18 @@ steps:
         environment:
           - ALPACAS=sometimes
 
+  - wait
+  - label: run, with multiple commands
+    command:
+      - echo \$ALPACAS
+      - pwd
+      - echo "llamas rock too"
+    plugins:
+      ${BUILDKITE_REPO}#${commit}:
+        run: alpinewithenv
+        config: tests/composefiles/docker-compose.v2.1.yml
+        environment:
+          - ALPACAS=sometimes
 
   - wait
   - label: build

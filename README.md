@@ -291,6 +291,12 @@ Sets `docker-compose` to run with `--verbose`
 
 The default is `false`.
 
+### `shell` (optional, run only)
+
+The shell that is used to invoke commands. This is so that multiple commands can be interpretted. If your container doesn't have bash installed, `/bin/sh -c` should work.
+
+The default is `/bin/bash -c`.
+
 ## Developing
 
 To run the tests:
