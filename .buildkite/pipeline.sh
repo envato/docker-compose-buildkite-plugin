@@ -73,6 +73,7 @@ steps:
     plugins:
       ${BUILDKITE_REPO}#${commit}:
         run: helloworld
+        shell: ~
         config: tests/composefiles/docker-compose.v2.0.yml
 
   - wait
@@ -81,6 +82,7 @@ steps:
     plugins:
       ${BUILDKITE_REPO}#${commit}:
         run: helloworld
+        shell: ~
         config: tests/composefiles/docker-compose.v2.1.yml
 
   - wait
@@ -88,6 +90,7 @@ steps:
     plugins:
       ${BUILDKITE_REPO}#${commit}:
         run: helloworld
+        shell: ~
         config: tests/composefiles/docker-compose.v2.1.yml
 
   - wait
@@ -96,6 +99,7 @@ steps:
     plugins:
       ${BUILDKITE_REPO}#${commit}:
         build: helloworldimage
+        shell: ~
         config: tests/composefiles/docker-compose.v2.1.yml
 
   - wait
@@ -104,6 +108,7 @@ steps:
     plugins:
       ${BUILDKITE_REPO}#${commit}:
         run: helloworldimage
+        shell: ~
         config: tests/composefiles/docker-compose.v2.1.yml
 
   - wait
@@ -121,6 +126,7 @@ steps:
     plugins:
       ${BUILDKITE_REPO}#${commit}:
         run: helloworld
+        shell: ~
         config: tests/composefiles/docker-compose.v2.1.yml
 
   - wait
