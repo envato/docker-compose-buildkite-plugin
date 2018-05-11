@@ -30,12 +30,11 @@ check_linked_containers_and_save_logs() {
     container_exit_code=$(docker inspect --format='{{.State.ExitCode}}' "$container_name")
 
     if [[ $container_exit_code -ne 0 ]] ; then
-      echo "+++ :warning: Linked container $container_name exited with $container_exit_code"
+      echo ":warning: Linked container $container_name exited with $container_exit_code"
     fi
 
     # Capture logs if the linked container failed OR if the main command failed
     if [[ $container_exit_code -ne 0 ]] || [[ $cmdexit -ne 0 ]] ; then
-      plugin_prompt_and_run docker logs --timestamps --tail 500 "$container_name"
       docker logs -t "$container_name" > "${logdir}/${container_name}.log"
     fi
   done
